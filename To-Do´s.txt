@@ -1,0 +1,5 @@
+Verhindern von "-Zahlen"
+Hoch und Niederzähler der Punkte ermöglichen
+Schriftart abändern
+Stoppen der Zeit ermöglichen
+Doku/Anleitung schreiben

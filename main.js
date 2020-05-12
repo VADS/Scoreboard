@@ -1,19 +1,35 @@
 /* Globals */
 var finishTime;
 
-/* Onload */
-resetTime();
-myTimer();
-var myVar = setInterval(myTimer, 100); //Start timer
-/* Onload End */
-
-
-/* Keypress handler */
-$(document).keypress(function (e) {
-    if (e.key == "e") {
-        resetTime();
+/* Uhr Starten*/
+$(document).keypress(function (w) {
+    if (w.key == "w") {
+        setInterval(myTimer, 100)();
     }
 });
+
+/* Keypress handler 15 Min*/
+$(document).keypress(function (e) {
+    if (e.key == "e") {
+        resetTime1();
+    }
+});
+
+/* Keypress handler 5 Min*/
+$(document).keypress(function (r) {
+    if (r.key == "r") {
+        resetTime2();
+    }
+});
+
+/* Keypress handler 10 Min*/
+$(document).keypress(function (t) {
+    if (t.key == "t") {
+        resetTime3();
+    }
+});
+            
+if (myTimer < 0) ();
 
 /* Utility functions */
 function myTimer() {
@@ -22,9 +38,16 @@ function myTimer() {
     $("#round-timer").text(msToTime(timeDifference));
 }
 
+/* Uhr Stop*/
+$(document).keypress(function (q) {
+    if (q.key == "q") {
+        clearInterval(myTimer);
+    }
+});
+
 function changePoints(pointsAmount, team) {
     switch (team) {
-        case 1:
+        case 1: 
             break;
         case 2:
             break;
@@ -35,8 +58,18 @@ function changePoints(pointsAmount, team) {
 
 }
 
-function resetTime() {
+function resetTime1() {
     startTime = new Date(Date.now() + (1000 * 60 * 15));
+    console.log(startTime);
+}
+
+function resetTime2() {
+    startTime = new Date(Date.now() + (1 * 60 * 15));
+    console.log(startTime);
+}
+
+function resetTime3() {
+    startTime = new Date(Date.now() + (667 * 60 * 15));
     console.log(startTime);
 }
 
