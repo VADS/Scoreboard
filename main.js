@@ -28,8 +28,7 @@ $(document).keypress(function (t) {
         resetTime3();
     }
 });
-            
-if (myTimer < 0) ();
+        
 
 /* Utility functions */
 function myTimer() {

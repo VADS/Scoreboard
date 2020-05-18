@@ -1,5 +1,5 @@
-Verhindern von "-Zahlen"
+Verhindern von "-Zahlen" 
 Hoch und Niederzähler der Punkte ermöglichen
 Schriftart abändern
-Stoppen der Zeit ermöglichen
+Stoppen der Zeit ermöglichen "bool"
 Doku/Anleitung schreiben
