@@ -1,19 +1,53 @@
 /* Globals */
 var finishTime;
 
-/* Onload */
-resetTime();
-myTimer();
-var myVar = setInterval(myTimer, 100); //Start timer
-/* Onload End */
+var punkteLinks = 0;
+var punkteRechts = 0;
 
+$(document).keypress(function (event) {
+    /* Uhr Starten*/
+    if (event.key == "w") {
+        setInterval(myTimer, 100)();
+    }
+    /* Keypress handler 15 Min*/
+    if (event.key == "e") {
+        resetTime1();
+    }
+    /* Keypress handler 5 Min*/
+    if (event.key == "r") {
+        resetTime2();
+    }
+    /* Keypress handler 10 Min*/
+    if (event.key == "t") {
+        resetTime3();
+    }
 
-/* Keypress handler */
-$(document).keypress(function (e) {
-    if (e.key == "e") {
-        resetTime();
+    /* Uhr Stop */
+    if (q.key == "q") {
+        clearInterval(myTimer);
+    }
+
+    //LINKES TEAM
+    /* Keypress handler Punkte links erhöhen */
+    if (event.key == "i") {
+        changePoints(1, "links")
+    }
+    /* Keypress handler Punkte links erniedrigen */
+    if (event.key == "k") {
+        changePoints(-1, "links")
+    }
+
+    //RECHTES TEAM
+    /* Keypress handler Punkte links erhöhen */
+    if (event.key == "o") {
+        changePoints(1, "rechts")
+    }
+    /* Keypress handler Punkte links erniedrigen */
+    if (event.key == "l") {
+        changePoints(-1, "rechts")
     }
 });
+
 
 /* Utility functions */
 function myTimer() {
@@ -22,22 +56,43 @@ function myTimer() {
     $("#round-timer").text(msToTime(timeDifference));
 }
 
+
+function resetTime1() {
+    startTime = new Date(Date.now() + (1000 * 60 * 15));
+    console.log(startTime);
+}
+
+function resetTime2() {
+    startTime = new Date(Date.now() + (1 * 60 * 15));
+    console.log(startTime);
+}
+
+function resetTime3() {
+    startTime = new Date(Date.now() + (667 * 60 * 15));
+    console.log(startTime);
+}
+
 function changePoints(pointsAmount, team) {
     switch (team) {
-        case 1:
+        case "links":
+            punkteLinks += pointsAmount;
+            if (punkteLinks < 0) {
+                punkteLinks = 0;
+            }
+            $(".points.points__left").text(punkteLinks);
             break;
-        case 2:
+        case "rechts":
+            punkteRechts += pointsAmount;
+            if (punkteRechts < 0) {
+                punkteRechts = 0;
+            }
+            $(".points.points__left").text(punkteLinks);
             break;
         default:
-            error("Invalid team number. Must be 1 or 2");
+            error("Invalid team number. Must be links or rechts");
             break;
     }
 
-}
-
-function resetTime() {
-    startTime = new Date(Date.now() + (1000 * 60 * 15));
-    console.log(startTime);
 }
 
 function msToTime(duration) {

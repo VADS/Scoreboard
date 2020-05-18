@@ -1,3 +1,10 @@
+/* Fonts */
+
+@font-face {
+    font-family: SevenSegment;
+    src: url(fonts/Segment7Standard.otf);
+}
+
 body, html {
     height: 100%;
     padding: 0;
@@ -25,8 +32,8 @@ body, html {
 }
 
 .points {
-    font-size: 150pt;
-    font-family: "Trebuchet MS";
+    font-size: 210pt;
+    font-family: SevenSegment;
 }
 
 .points__left {
@@ -39,5 +46,6 @@ body, html {
 
 #round-timer {
     font-size: 90pt;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
 }
