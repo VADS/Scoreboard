@@ -1,31 +1,45 @@
 /* Globals */
 var finishTime;
 
-/* Uhr Starten*/
-$(document).keypress(function (w) {
-    if (w.key == "w") {
+var punkteLinks = 0;
+var punkteRechts = 0;
+
+$(document).keypress(function (event) {
+    /* Uhr Starten*/
+    if (event.key == "w") {
         setInterval(myTimer, 100)();
     }
-});
-
-/* Keypress handler 15 Min*/
-$(document).keypress(function (e) {
-    if (e.key == "e") {
+    /* Keypress handler 15 Min*/
+    if (event.key == "e") {
         resetTime1();
     }
-});
-
-/* Keypress handler 5 Min*/
-$(document).keypress(function (r) {
-    if (r.key == "r") {
+    /* Keypress handler 5 Min*/
+    if (event.key == "r") {
         resetTime2();
     }
-});
-
-/* Keypress handler 10 Min*/
-$(document).keypress(function (t) {
-    if (t.key == "t") {
+    /* Keypress handler 10 Min*/
+    if (event.key == "t") {
         resetTime3();
+    }
+
+    //LINKES TEAM
+    /* Keypress handler Punkte links erhöhen */
+    if (event.key == "i") {
+        changePoints(1, "links")
+    }
+    /* Keypress handler Punkte links erniedrigen */
+    if (event.key == "k") {
+        changePoints(-1, "links")
+    }
+
+    //RECHTES TEAM
+    /* Keypress handler Punkte links erhöhen */
+    if (event.key == "o") {
+        changePoints(1, "rechts")
+    }
+    /* Keypress handler Punkte links erniedrigen */
+    if (event.key == "l") {
+        changePoints(-1, "rechts")
     }
 });
         
@@ -37,7 +51,7 @@ function myTimer() {
     $("#round-timer").text(msToTime(timeDifference));
 }
 
-/* Uhr Stop*/
+/* Uhr Stop */
 $(document).keypress(function (q) {
     if (q.key == "q") {
         clearInterval(myTimer);
@@ -46,12 +60,22 @@ $(document).keypress(function (q) {
 
 function changePoints(pointsAmount, team) {
     switch (team) {
-        case 1: 
+        case "links":
+            punkteLinks += pointsAmount;
+            if (punkteLinks < 0) {
+                punkteLinks = 0;
+            }
+            $(".points.points__left").text(punkteLinks);
             break;
-        case 2:
+        case "rechts":
+            punkteRechts += pointsAmount;
+            if (punkteRechts < 0) {
+                punkteRechts = 0;
+            }
+            $(".points.points__left").text(punkteLinks);
             break;
         default:
-            error("Invalid team number. Must be 1 or 2");
+            error("Invalid team number. Must be links or rechts");
             break;
     }
 
