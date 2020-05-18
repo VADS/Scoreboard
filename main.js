@@ -23,7 +23,7 @@ $(document).keypress(function (event) {
     }
 
     /* Uhr Stop */
-    if (q.key == "q") {
+    if (event.key == "q") {
         clearInterval(myTimer);
     }
 
