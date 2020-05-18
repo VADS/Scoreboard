@@ -22,6 +22,11 @@ $(document).keypress(function (event) {
         resetTime3();
     }
 
+    /* Uhr Stop */
+    if (q.key == "q") {
+        clearInterval(myTimer);
+    }
+
     //LINKES TEAM
     /* Keypress handler Punkte links erhöhen */
     if (event.key == "i") {
@@ -42,7 +47,7 @@ $(document).keypress(function (event) {
         changePoints(-1, "rechts")
     }
 });
-        
+
 
 /* Utility functions */
 function myTimer() {
@@ -51,12 +56,21 @@ function myTimer() {
     $("#round-timer").text(msToTime(timeDifference));
 }
 
-/* Uhr Stop */
-$(document).keypress(function (q) {
-    if (q.key == "q") {
-        clearInterval(myTimer);
-    }
-});
+
+function resetTime1() {
+    startTime = new Date(Date.now() + (1000 * 60 * 15));
+    console.log(startTime);
+}
+
+function resetTime2() {
+    startTime = new Date(Date.now() + (1 * 60 * 15));
+    console.log(startTime);
+}
+
+function resetTime3() {
+    startTime = new Date(Date.now() + (667 * 60 * 15));
+    console.log(startTime);
+}
 
 function changePoints(pointsAmount, team) {
     switch (team) {
@@ -79,21 +93,6 @@ function changePoints(pointsAmount, team) {
             break;
     }
 
-}
-
-function resetTime1() {
-    startTime = new Date(Date.now() + (1000 * 60 * 15));
-    console.log(startTime);
-}
-
-function resetTime2() {
-    startTime = new Date(Date.now() + (1 * 60 * 15));
-    console.log(startTime);
-}
-
-function resetTime3() {
-    startTime = new Date(Date.now() + (667 * 60 * 15));
-    console.log(startTime);
 }
 
 function msToTime(duration) {
