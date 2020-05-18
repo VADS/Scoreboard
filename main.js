@@ -86,7 +86,7 @@ function changePoints(pointsAmount, team) {
             if (punkteRechts < 0) {
                 punkteRechts = 0;
             }
-            $(".points.points__left").text(punkteLinks);
+            $(".points.points__right").text(punkteRechts);
             break;
         default:
             error("Invalid team number. Must be links or rechts");
