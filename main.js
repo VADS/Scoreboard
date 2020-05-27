@@ -58,17 +58,17 @@ function myTimer() {
 
 
 function resetTime1() {
-    startTime = new Date(Date.now() + (1000 * 60 * 15));
+    startTime = new Date(Date.now() + (1000.11 * 60 * 15));
     console.log(startTime);
 }
 
 function resetTime2() {
-    startTime = new Date(Date.now() + (1 * 60 * 15));
+    startTime = new Date(Date.now() + (666.75 * 60 * 15));
     console.log(startTime);
 }
 
 function resetTime3() {
-    startTime = new Date(Date.now() + (667 * 60 * 15));
+    startTime = new Date(Date.now() + (333.375 * 60 * 15));
     console.log(startTime);
 }
 
