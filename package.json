@@ -1,9 +1,11 @@
 {
   "name": "scoreboard",
   "version": "0.0.1",
+  "type": "module",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "http-server"
   },
   "repository": {
     "type": "git",
@@ -17,8 +19,8 @@
   "homepage": "https://github.com/VADS/Scoreboard#readme",
   "dependencies": {
     "@types/node": "^14.0.27",
-    "common-js": "^0.3.8",
-    "moment": "^2.27.0",
+    "http-server": "^0.12.3",
+    "timer-node": "^3.0.0",
     "typescript": "^3.9.7"
   }
 }
