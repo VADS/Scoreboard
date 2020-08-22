@@ -1,6 +1,4 @@
 namespace client {
-    var test: Stopwatch = new Stopwatch();
-
     var punkteLinks = 0;
     var punkteRechts = 0;
 
