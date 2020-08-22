@@ -1,10 +1,12 @@
 "use strict";
 var client;
 (function (client) {
-    var Timer = require('timer-node');
-    var timer = new Timer("test-timer");
-    timer.start();
-    console.log(timer.isRunning());
+    var Timer = require("tiny-timer");
+    var timer = new Timer();
+    timer.on("tick", function (ms) { return console.log("tick", ms); });
+    timer.on("done", function () { return console.log("done!"); });
+    timer.on("statusChanged", function (status) { return console.log("status:", status); });
+    timer.start(5000); // run for 5 seconds
     var punkteLinks = 0;
     var punkteRechts = 0;
     var startTime;

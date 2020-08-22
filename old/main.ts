@@ -1,9 +1,5 @@
 namespace client {
-    const Timer = require('timer-node');
-
-    const timer = new Timer("test-timer");
-    timer.start();
-    console.log(timer.isRunning());
+    var test: Stopwatch = new Stopwatch();
 
     var punkteLinks = 0;
     var punkteRechts = 0;
