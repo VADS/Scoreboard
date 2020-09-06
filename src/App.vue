@@ -6,8 +6,9 @@
                 <div class="points-divider"></div>
                 <div class="points points__right">{{ pointsRight }}</div>
             </div>
-            <div id="round-timer">{{ timerString }}</div>
-            <span>{{ testDuration.asMilliseconds() / 1000 }}</span>
+            <div id="round-timer">
+                {{ testDuration.asMilliseconds() / 1000 }}
+            </div>
         </div>
     </div>
 </template>
@@ -26,7 +27,9 @@ export default defineComponent({
     data: () => ({
         pointsLeft: 0 as number,
         pointsRight: 0 as number,
-        testDuration: moment.duration(5, 'seconds')
+        testDuration: moment.duration(5, 'seconds'),
+        timerInterval: 0 as number,
+        isTimerRunning: false as boolean
     }),
     computed: {
         timerString: function(): string {
@@ -53,23 +56,33 @@ export default defineComponent({
                     break;
             }
         },
-        getHumanDate: function() {
-            return moment(new Date(), 'YYYY-MM-DD').format('DD.MM.YYYY');
+        startTimer(): void {
+            this.timerInterval = setInterval(() => {
+                this.testDuration.subtract(
+                    moment.duration(100, 'milliseconds')
+                );
+                if (this.testDuration.asMilliseconds() <= 0) {
+                    this.pauseTimer();
+                }
+            }, 100);
+        },
+        pauseTimer(): void {
+            clearInterval(this.timerInterval);
+        },
+        toggleTimer(): void {
+            if (this.isTimerRunning) {
+                this.pauseTimer();
+            } else {
+                this.startTimer();
+            }
+            this.isTimerRunning = !this.isTimerRunning;
         }
     },
     mounted() {
-        //WIP
-        const interval: number = setInterval(() => {
-            this.testDuration.subtract(moment.duration(100, 'milliseconds'));
-            if (this.testDuration.asMilliseconds() <= 0) {
-                clearInterval(interval);
-            }
-        }, 100);
-
         document.addEventListener('keydown', event => {
             /* Uhr Stop */
-            if (event.key == 'q') {
-                // clearInterval(timerInterval);
+            if (event.key == ' ') {
+                this.toggleTimer();
             }
 
             //LINKES TEAM
@@ -112,6 +125,13 @@ export default defineComponent({
     src: url(assets/fonts/Segment7Standard.otf);
 }
 
+body,
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 .site-wrap {
     width: 100%;
     height: 100%;
@@ -148,7 +168,7 @@ export default defineComponent({
 
 /* Timer */
 #round-timer {
-    font-size: 90pt;
+    font-size: 110pt;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
         'Lucida Sans', Arial, sans-serif;
     text-align: center;
