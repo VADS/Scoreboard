@@ -29,7 +29,8 @@ export default defineComponent({
         pointsRight: 0 as number,
         testDuration: moment.duration(5, 'seconds'),
         timerInterval: 0 as number,
-        isTimerRunning: false as boolean
+        isTimerRunning: false as boolean,
+        Team
     }),
     computed: {
         timerString: function(): string {
@@ -149,12 +150,12 @@ html {
 }
 
 .points-divider {
-    border-left: 6px solid black;
+    border-left: 10px solid black;
 }
 
 /* Points */
 .points {
-    font-size: 210pt;
+    font-size: 45vh;
     font-family: SevenSegment;
 }
 
@@ -168,7 +169,7 @@ html {
 
 /* Timer */
 #round-timer {
-    font-size: 110pt;
+    font-size: 30vh;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
         'Lucida Sans', Arial, sans-serif;
     text-align: center;
