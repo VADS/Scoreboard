@@ -7,7 +7,7 @@
                 <div class="points points__right">{{ pointsRight }}</div>
             </div>
             <div id="round-timer">
-                {{ testDuration.asMilliseconds() / 1000 }}
+                {{ testDuration.format() }}
             </div>
         </div>
     </div>
@@ -16,11 +16,23 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import moment from 'moment';
+import momentDurationFormatSetup from 'moment-duration-format';
 
 enum Team {
     LEFT = 1,
     RIGHT = 2
 }
+
+const keyToTimerDictionary = {
+    '1': 5,
+    '2': 10,
+    '3': 15,
+    '4': 20,
+    '5': 30,
+    '6': 40,
+    '7': 50,
+    '8': 60
+};
 
 export default defineComponent({
     name: 'App',
@@ -30,7 +42,8 @@ export default defineComponent({
         testDuration: moment.duration(5, 'seconds'),
         timerInterval: 0 as number,
         isTimerRunning: false as boolean,
-        Team
+        Team,
+        keyToTimerDictionary
     }),
     computed: {
         timerString: function(): string {
@@ -80,6 +93,7 @@ export default defineComponent({
         }
     },
     mounted() {
+        momentDurationFormatSetup(moment);
         document.addEventListener('keydown', event => {
             /* Uhr Stop */
             if (event.key == ' ') {
@@ -88,22 +102,29 @@ export default defineComponent({
 
             //LINKES TEAM
             /* Keypress handler Punkte left erhöhen */
-            if (event.key == 'i') {
+            if (event.key == 'q') {
                 this.changePoints(1, Team.LEFT);
             }
             /* Keypress handler Punkte left erniedrigen */
-            if (event.key == 'k') {
+            if (event.key == 'a') {
                 this.changePoints(-1, Team.LEFT);
             }
 
             //RECHTES TEAM
             /* Keypress handler Punkte left erhöhen */
-            if (event.key == 'o') {
+            if (event.key == 'e') {
                 this.changePoints(1, Team.RIGHT);
             }
             /* Keypress handler Punkte left erniedrigen */
-            if (event.key == 'l') {
+            if (event.key == 'd') {
                 this.changePoints(-1, Team.RIGHT);
+            }
+
+            if (Object.keys(this.keyToTimerDictionary).includes(event.key)) {
+                this.testDuration = moment.duration(
+                    this.keyToTimerDictionary[event.key],
+                    'minutes'
+                );
             }
         });
     }
