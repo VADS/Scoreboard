@@ -7,7 +7,7 @@
                 <div class="points points__right">{{ pointsRight }}</div>
             </div>
             <div id="round-timer">
-                {{ testDuration.format() }}
+                {{ momentTimerInstance.format('mm:ss', { trim: false }) }}
             </div>
         </div>
     </div>
