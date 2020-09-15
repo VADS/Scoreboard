@@ -39,11 +39,12 @@ export default defineComponent({
     data: () => ({
         pointsLeft: 0 as number,
         pointsRight: 0 as number,
-        testDuration: moment.duration(5, 'seconds'),
+        momentTimerInstance: moment.duration(2, 'seconds'),
         timerInterval: 0 as number,
         isTimerRunning: false as boolean,
         Team,
-        keyToTimerDictionary
+        keyToTimerDictionary,
+        airhornAudioClip: new Audio(require('@/assets/airhorn.wav'))
     }),
     computed: {
         timerString: function(): string {
@@ -72,11 +73,13 @@ export default defineComponent({
         },
         startTimer(): void {
             this.timerInterval = setInterval(() => {
-                this.testDuration.subtract(
+                this.momentTimerInstance.subtract(
                     moment.duration(100, 'milliseconds')
                 );
-                if (this.testDuration.asMilliseconds() <= 0) {
+                if (this.momentTimerInstance.asMilliseconds() <= 0) {
                     this.pauseTimer();
+
+                    this.airhornAudioClip.play();
                 }
             }, 100);
         },
@@ -86,7 +89,7 @@ export default defineComponent({
         toggleTimer(): void {
             if (this.isTimerRunning) {
                 this.pauseTimer();
-            } else {
+            } else if (this.momentTimerInstance.asMilliseconds() > 0) {
                 this.startTimer();
             }
             this.isTimerRunning = !this.isTimerRunning;
@@ -121,7 +124,7 @@ export default defineComponent({
             }
 
             if (Object.keys(this.keyToTimerDictionary).includes(event.key)) {
-                this.testDuration = moment.duration(
+                this.momentTimerInstance = moment.duration(
                     this.keyToTimerDictionary[event.key],
                     'minutes'
                 );
@@ -176,7 +179,7 @@ html {
 
 /* Points */
 .points {
-    font-size: 45vh;
+    font-size: 50vh;
     font-family: SevenSegment;
 }
 
@@ -190,7 +193,7 @@ html {
 
 /* Timer */
 #round-timer {
-    font-size: 30vh;
+    font-size: 23vh;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
         'Lucida Sans', Arial, sans-serif;
     text-align: center;
