@@ -18,6 +18,8 @@ import { defineComponent } from 'vue';
 import moment from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
 
+document.title = 'Scoreboard';
+
 enum Team {
     LEFT = 1,
     RIGHT = 2
@@ -39,7 +41,7 @@ export default defineComponent({
     data: () => ({
         pointsLeft: 0 as number,
         pointsRight: 0 as number,
-        momentTimerInstance: moment.duration(2, 'seconds'),
+        momentTimerInstance: moment.duration(10, 'minutes'),
         timerInterval: 0 as number,
         isTimerRunning: false as boolean,
         Team,
