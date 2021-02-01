@@ -46,7 +46,8 @@ export default defineComponent({
         isTimerRunning: false as boolean,
         Team,
         keyToTimerDictionary,
-        airhornAudioClip: new Audio(require('@/assets/airhorn.wav'))
+        airhornAudioClip: new Audio(require('@/assets/airhorn.wav')),
+        keyAlreadyHeldDown: false
     }),
     computed: {
         timerString: function(): string {
@@ -100,6 +101,11 @@ export default defineComponent({
     mounted() {
         momentDurationFormatSetup(moment);
         document.addEventListener('keydown', event => {
+            if (this.keyAlreadyHeldDown) {
+                return;
+            }
+            this.keyAlreadyHeldDown = true;
+
             /* Uhr Stop */
             if (event.key == ' ') {
                 this.toggleTimer();
@@ -131,6 +137,9 @@ export default defineComponent({
                     'minutes'
                 );
             }
+        });
+        document.addEventListener('keyup', event => {
+            this.keyAlreadyHeldDown = false;
         });
     }
 });
