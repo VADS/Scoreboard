@@ -190,7 +190,7 @@ html {
 }
 
 .points__right {
-    color: green;
+    color: black;
 }
 
 /* Timer */
