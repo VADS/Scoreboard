@@ -183,6 +183,8 @@ html {
 .points {
     font-size: 50vh;
     font-family: SevenSegment;
+    width: 50%;
+    text-align: center;
 }
 
 .points__left {
