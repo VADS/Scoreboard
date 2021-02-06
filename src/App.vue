@@ -2,9 +2,13 @@
     <div id="app">
         <div class="site-wrap">
             <div class="points-wrap">
-                <div class="points points__left">{{ pointsLeft }}</div>
+                <div class="points points__left">
+                    {{ pointsLeft.toString().padStart(2, '0') }}
+                </div>
                 <div class="points-divider"></div>
-                <div class="points points__right">{{ pointsRight }}</div>
+                <div class="points points__right">
+                    {{ pointsRight.toString().padStart(2, '0') }}
+                </div>
             </div>
             <div id="round-timer">
                 {{ momentTimerInstance.format('mm:ss', { trim: false }) }}
