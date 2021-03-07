@@ -51,7 +51,8 @@ export default defineComponent({
         Team,
         keyToTimerDictionary,
         airhornAudioClip: new Audio(require('@/assets/airhorn.wav')),
-        keyAlreadyHeldDown: false
+        keyAlreadyHeldDown: false,
+        canPointsBeChanged: true
     }),
     computed: {
         timerString: function(): string {
@@ -105,10 +106,15 @@ export default defineComponent({
     mounted() {
         momentDurationFormatSetup(moment);
         document.addEventListener('keydown', event => {
-            if (this.keyAlreadyHeldDown) {
+            if (!this.canPointsBeChanged || this.keyAlreadyHeldDown) {
                 return;
             }
             this.keyAlreadyHeldDown = true;
+            this.canPointsBeChanged = false;
+
+            setTimeout(() => {
+                this.canPointsBeChanged = true;
+            }, 1000);
 
             /* Uhr Stop */
             if (event.key == ' ') {
