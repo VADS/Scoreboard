@@ -45,7 +45,7 @@ export default defineComponent({
     data: () => ({
         pointsLeft: 0 as number,
         pointsRight: 0 as number,
-        momentTimerInstance: moment.duration(10, 'minutes'),
+        momentTimerInstance: moment.duration(15, 'minutes'),
         timerInterval: 0 as number,
         isTimerRunning: false as boolean,
         Team,
@@ -81,9 +81,7 @@ export default defineComponent({
         },
         startTimer(): void {
             this.timerInterval = setInterval(() => {
-                this.momentTimerInstance.subtract(
-                    moment.duration(100, 'milliseconds')
-                );
+                this.momentTimerInstance.subtract(moment.duration(100, 'milliseconds'));
                 if (this.momentTimerInstance.asMilliseconds() <= 0) {
                     this.pauseTimer();
 
@@ -106,12 +104,16 @@ export default defineComponent({
     mounted() {
         momentDurationFormatSetup(moment);
         document.addEventListener('keydown', event => {
-            if (!this.canPointsBeChanged || this.keyAlreadyHeldDown) {
+            if (!this.canPointsBeChanged && (event.key == 'q' || event.key == 'e')) {
+                return;
+            }
+            if (this.keyAlreadyHeldDown) {
                 return;
             }
             this.keyAlreadyHeldDown = true;
-            this.canPointsBeChanged = false;
 
+            // Delay for double clicking buttons
+            this.canPointsBeChanged = false;
             setTimeout(() => {
                 this.canPointsBeChanged = true;
             }, 1000);
@@ -142,13 +144,10 @@ export default defineComponent({
             }
 
             if (Object.keys(this.keyToTimerDictionary).includes(event.key)) {
-                this.momentTimerInstance = moment.duration(
-                    this.keyToTimerDictionary[event.key],
-                    'minutes'
-                );
+                this.momentTimerInstance = moment.duration(this.keyToTimerDictionary[event.key], 'minutes');
             }
         });
-        document.addEventListener('keyup', event => {
+        document.addEventListener('keyup', () => {
             this.keyAlreadyHeldDown = false;
         });
     }
@@ -217,8 +216,7 @@ html {
 /* Timer */
 #round-timer {
     font-size: 23vh;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
-        'Lucida Sans', Arial, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
 }
 </style>
