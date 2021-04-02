@@ -5,7 +5,8 @@ const int leftButton = 6;
 const int rightButton = 5;
 
 long gracePeriodTimer = 0;
-long gracePeriodAmount = 1000;
+long gracePeriod1Amount = 1000;
+long gracePeriod2Amount = 2500;
 
 bool leftButtonState, rightButtonState;
 bool lastLeftButtonState, lastRightButtonState;
@@ -46,8 +47,12 @@ void loop() {
   }
 
    if (noButtonsPressed) {
-    if (timerStarted && millis() < gracePeriodAmount + gracePeriodTimer ) {
+    if (timerStarted && millis() < gracePeriod1Amount + gracePeriodTimer) {
       Keyboard.write(' ');
+    }
+    else if (timerStarted && millis() < gracePeriod2Amount + gracePeriodTimer) {
+      Keyboard.press(KEY_F5);
+      Keyboard.releaseAll();
     }
     timerStarted = false;
   }
