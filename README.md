@@ -1,5 +1,7 @@
 # scoreboard
 
+A Vue.js browser-based scoreboard with arduino controlled buttons for score tracking
+
 ## Project setup
 ```
 npm install
