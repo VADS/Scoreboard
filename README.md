@@ -2,6 +2,8 @@
 
 A Vue.js browser-based scoreboard with arduino controlled buttons for score tracking
 
+find the arduino code in [here](/scoreboard_arduino)
+
 ## Project setup
 ```
 npm install
